@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -10,23 +10,17 @@ import {
 
 import { Dashboard } from "./tasks/Dashboard"
 import { List } from "./tasks/List"
-import { SingIn } from "./Auth/SingIn"
-import { SingUp } from "./Auth/SingUp"
-import { RequireAuth } from "./Auth/RequireAuth"
+import { SingIn } from "./auth/SingIn"
+import { SingUp } from "./auth/SingUp"
+import { RequireAuth } from "./auth/RequireAuth"
+import { Bar } from "./nav/Bar"
 
+import { AuthProvider } from "/imports/hooks/use-auth"
 
 export const App = () => {
-  const user = useTracker(() => Meteor.user());
-
-  const logout = () => Meteor.logout();
-
   return (
-    <Fragment>
-      {
-        user && <div className="user" onClick={logout}>
-          { user.username } 🚪
-        </div>
-      }
+    <AuthProvider>
+       <Bar />
 
       <BrowserRouter>
         <Routes>
@@ -50,6 +44,6 @@ export const App = () => {
           <Route path="/singup" element={<SingUp />} />
         </Routes>
       </BrowserRouter>
-    </Fragment>
+    </AuthProvider>
   )
 }

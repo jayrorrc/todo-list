@@ -1,28 +1,27 @@
 import React, { useState, Fragment } from 'react';
 
-import { Meteor } from 'meteor/meteor';
-
 import {
   useNavigate,
   useLocation,
   Link
 } from "react-router-dom";
 
+import { useAuth } from "/imports/hooks/use-auth"
 
 export const SingIn = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
   const [ username, setUsername ] = useState('');
-  const [password, setPassword] = useState('');
+  const [ password, setPassword ] = useState('');
 
-  const submit = e => {
+  const { signin } = useAuth();
+
+  const submit = async (e) => {
     e.preventDefault();
 
-    Meteor.loginWithPassword(username, password, () => {
-      navigate(state?.path || "/");
-    });
-
+    await signin(username, password)
+    navigate(state?.path || "/")
   };
 
   return (
