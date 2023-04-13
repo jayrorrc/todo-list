@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -22,6 +22,7 @@ function useProvideAuth() {
           }
 
           setAuthed(true)
+          sessionStorage.setItem('authed', true)
 
           return resolve()
         })
@@ -36,6 +37,7 @@ function useProvideAuth() {
           }
 
           setAuthed(false)
+          sessionStorage.setItem('authed', false)
 
           return resolve()
         })

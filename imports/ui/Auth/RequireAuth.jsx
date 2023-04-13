@@ -12,9 +12,7 @@ export const RequireAuth = ({ children }) => {
 
   const { authed } = useAuth()
 
-  return authed ? (
-    children
-  ) : (
-    <Navigate to="/singin" replace state={{ path: location.pathname }} />
-  );
+  return (authed || sessionStorage.getItem('authed') === 'true')
+    ? (children)
+    : (<Navigate to="/singin" replace state={{ path: location.pathname }} />)
 }

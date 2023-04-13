@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { useTracker } from 'meteor/react-meteor-data';
 
 import {
   BrowserRouter,
@@ -18,6 +17,10 @@ import { Bar } from "./nav/Bar"
 import { AuthProvider } from "/imports/hooks/use-auth"
 
 export const App = () => {
+  if (!sessionStorage.getItem('authed')) {
+    Meteor.logout()
+  }
+
   return (
     <AuthProvider>
        <Bar />
