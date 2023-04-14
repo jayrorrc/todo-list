@@ -3,10 +3,16 @@ import React, { useState, Fragment } from 'react';
 import {
   useNavigate,
   useLocation,
-  Link
+  Link as RouterLink
 } from "react-router-dom";
 
 import { useAuth } from "/imports/hooks/use-auth"
+
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 
 export const SingIn = () => {
   const navigate = useNavigate();
@@ -26,33 +32,94 @@ export const SingIn = () => {
 
   return (
     <Fragment>
-      <h1>Bem vindo ao To Do List!</h1>
+      <Box
+        component="form"
+        onSubmit={submit}
+        sx={{
+          p: 3,
+          borderRadius: 1,
+          boxShadow: 2
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ textAlign: 'center', m: 1 }}
+        >
+          Bem vindo ao To Do List!
+        </Typography>
 
-      <form onSubmit={submit} className="login-form">
-        <label htmlFor="username">Username</label>
-
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
+        <TextField
+          id="username"
+          label="Username"
           required
+          fullWidth
+          value={username}
           onChange={e => setUsername(e.target.value)}
+          sx={{ my: 2 }}
         />
 
-        <label htmlFor="password">Password</label>
-
-        <input
+        <TextField
+          id="password"
+          label="Password"
           type="password"
-          placeholder="Password"
-          name="password"
           required
+          fullWidth
+          value={password}
           onChange={e => setPassword(e.target.value)}
+          sx={{ my: 2 }}
         />
 
-        <button type="submit">Entrar</button>
-      </form>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{
+            mt: 3,
+            mb: 2,
+            bgcolor: '#333232',
+            "&:hover": {
+              bgcolor: "#191919",
+            },
+          }}
+        >
+          Sign In
+        </Button>
+      </Box>
 
-      <Link to="/singup"> Cadastrar </Link>
+      <Box
+        sx={{
+          textAlign: 'center',
+          m: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Link
+          component={RouterLink}
+          to="/singup"
+          underline="hover"
+          sx={{
+            color: '#333232',
+            m: 1,
+          }}
+        >
+          Cadastrar
+        </Link>
+
+        <Link
+          component={RouterLink}
+          to="#"
+          underline="hover"
+          sx={{
+            color: '#333232',
+            m: 1,
+          }}
+        >
+          Recuperar senha
+        </Link>
+      </Box>
     </Fragment>
   );
 };

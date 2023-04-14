@@ -16,6 +16,8 @@ import { Bar } from "./nav/Bar"
 
 import { AuthProvider } from "/imports/hooks/use-auth"
 
+import Container from '@mui/material/Container';
+
 export const App = () => {
   if (!sessionStorage.getItem('authed')) {
     Meteor.logout()
@@ -23,30 +25,32 @@ export const App = () => {
 
   return (
     <AuthProvider>
-       <Bar />
+      <Container component="main" maxWidth="xs">
+        <Bar />
 
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/tasks"
-            element={
-              <RequireAuth>
-                <List />
-              </RequireAuth>
-            }
-          />
-          <Route path="/singin" element={<SingIn />} />
-          <Route path="/singup" element={<SingUp />} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/tasks"
+              element={
+                <RequireAuth>
+                  <List />
+                </RequireAuth>
+              }
+            />
+            <Route path="/singin" element={<SingIn />} />
+            <Route path="/singup" element={<SingUp />} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
     </AuthProvider>
   )
 }
