@@ -19,10 +19,6 @@ import { AuthProvider } from "/imports/hooks/use-auth"
 import Container from '@mui/material/Container';
 
 export const App = () => {
-  if (!sessionStorage.getItem('authed')) {
-    Meteor.logout()
-  }
-
   return (
     <AuthProvider>
       <Container component="main" maxWidth="xs">
