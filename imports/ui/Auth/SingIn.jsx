@@ -90,7 +90,7 @@ export const SingIn = () => {
       <Box
         sx={{
           textAlign: 'center',
-          m: 3,
+          my: 3,
           width: '100%',
           display: 'flex',
           flexDirection: 'column'
