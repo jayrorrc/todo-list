@@ -1,18 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 
-import {
-  Class,
-  Enum
-} from 'meteor/jagi:astronomy';
+import { Class } from 'meteor/jagi:astronomy';
 
-const Status = Enum.create({
-  name: 'Status',
-  identifiers: {
-    TODO: 'Cadastrada',
-    IN_PROGRESS: 'Em Andamento',
-    DONE: 'Concluida',
-  }
-});
+import { Status } from './TasksStatus'
 
 const Tasks = new Mongo.Collection('tasks');
 

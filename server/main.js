@@ -1,6 +1,11 @@
 import { Meteor } from 'meteor/meteor';
+
 import { Accounts } from 'meteor/accounts-base';
 import { Task } from '/imports/db/TasksCollection';
+import { Status } from '/imports/db/TasksStatus'
+
+import '/imports/api/tasks/methods';
+
 
 const insertTask = (obj, user) => {
   const task = new Task();
@@ -45,43 +50,43 @@ Meteor.startup(async () => {
       {
         name: 'First Task',
         description: 'First Description',
-        status: 'Cadastrada',
+        status: Status.TODO,
         private: false,
       },
       {
         name: 'Second Task',
         description: 'Second Description',
-        status: 'Cadastrada',
+        status: Status.TODO,
         private: false,
       },
       {
         name: 'Third Task',
         description: 'Third Description',
-        status: 'Em Andamento',
+        status: Status.IN_PROGRESS,
         private: false,
       },
       {
         name: 'Fourth Task',
         description: 'Fourth Description',
-        status: 'Em Andamento',
+        status: Status.IN_PROGRESS,
         private: true,
       },
       {
         name: 'Fifth Task',
         description: 'Fifth Description',
-        status: 'Em Andamento',
+        status: Status.IN_PROGRESS,
         private: false,
       },
       {
         name: 'Sixth Task',
         description: 'Sixth Description',
-        status: 'Em Andamento',
+        status: Status.DONE,
         private: false,
       },
       {
         name: 'Seventh Task',
         description: 'Seventh Description',
-        status: 'Em Andamento',
+        status: Status.DONE,
         private: false,
       },
     ].forEach(taskText => insertTask(taskText, user));
@@ -90,19 +95,19 @@ Meteor.startup(async () => {
       {
         name: 'Eighth Task',
         description: 'Eighth Description',
-        status: 'Cadastrada',
-        private: true,
+        status: Status.TODO,
+        private: false,
       },
       {
         name: 'Ninth Task',
         description: 'Ninth Description',
-        status: 'Cadastrada',
+        status: Status.TODO,
         private: true,
       },
       {
         name: 'Tenth Task',
         description: 'Tenth Description',
-        status: 'Em Andamento',
+        status: Status.IN_PROGRESS,
         private: false,
       },
     ].forEach(taskText => insertTask(taskText, { _id: '9vKWZHrfyXsryEfF7' }));
