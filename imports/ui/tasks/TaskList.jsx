@@ -7,29 +7,26 @@ import { TaskListItem } from './TaskListItem'
 import { PageLayout } from '../PageLayout'
 
 import List from '@mui/material/List'
-import CircularProgress from '@mui/material/CircularProgress'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 export const TaskList = () => {
-  const [ hideCompleted, setHideCompleted ] = useState(false);
+  const [ hideCompleted, setHideCompleted ] = useState(true)
 
   const { tasks, loading } = useTracker(() => {
-    const noDataAvailable = { tasks: [] };
+    const noDataAvailable = { tasks: [] }
     if (!Meteor.user()) {
-      return noDataAvailable;
+      return noDataAvailable
     }
 
-    const handlerTasks = Meteor.subscribe('tasks', { hideCompleted });
-    const handlerUsersNames = Meteor.subscribe('users.names');
+    const handlerTasks = Meteor.subscribe('tasks', { hideCompleted })
+    const handlerUsersNames = Meteor.subscribe('users.names')
 
     if (!handlerTasks.ready() || !handlerUsersNames.ready()) {
-      return { ...noDataAvailable, loading: true };
+      return { ...noDataAvailable, loading: true }
     }
 
     const tasks = Task.find().fetch()
 
-    return { tasks };
+    return { tasks }
   })
 
   return (

@@ -77,10 +77,6 @@ export const SingIn = () => {
           sx={{
             mt: 3,
             mb: 2,
-            bgcolor: '#333232',
-            "&:hover": {
-              bgcolor: "#191919",
-            },
           }}
         >
           Sign In

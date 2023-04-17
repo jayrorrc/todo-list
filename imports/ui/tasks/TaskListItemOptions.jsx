@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react'
 
+import { useNavigate } from "react-router-dom";
+
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
-export const TaskListItemOptions = ({ actionEdit, actionRemove }) => {
+export const TaskListItemOptions = ({ id }) => {
+  const navigate = useNavigate();
+
   const ref = useRef(null)
   const [ anchorEl, setAnchorEl ] = useState(null)
   const open = Boolean(anchorEl)
@@ -14,14 +18,18 @@ export const TaskListItemOptions = ({ actionEdit, actionRemove }) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = (callback) => {
-    return () => {
-      setAnchorEl(null)
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
-      if (callback) {
-        callback()
-      }
-    }
+  const handleEdit = () => {
+    handleClose()
+    navigate(`/task/${id}/edit`)
+  }
+
+  const handleDelete = () => {
+    console.log('delete task')
+    handleClose()
   }
 
   useEffect(() => {
@@ -63,8 +71,8 @@ export const TaskListItemOptions = ({ actionEdit, actionRemove }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose(actionEdit)}>Editar</MenuItem>
-        <MenuItem onClick={handleClose(actionRemove)}>Remover</MenuItem>
+        <MenuItem onClick={handleEdit}>Editar</MenuItem>
+        <MenuItem onClick={handleDelete}>Remover</MenuItem>
       </Menu>
     </Fragment>
   )

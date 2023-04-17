@@ -5,11 +5,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import PendingActionsIcon from '@mui/icons-material/PendingActions'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+
+import { Status } from '/imports/db/TasksStatus'
 
 import { TaskListItemOptions } from './TaskListItemOptions'
 
@@ -34,14 +33,23 @@ export const TaskListItem = ({ task, key }) => {
     return `${day}/${month}/${year} ${hour}:${minutes} - ${task.name}`
   }
 
+  const isDone = task.status === Status.DONE
+
   return (
     <ListItem
       key={task._id}
-      sx={{ bgcolor: (key % 2) ? '#cccbcb' : '#e5e5e5' }}
+      sx={{
+        bgcolor: (key % 2) ? 'primary.main' : 'info.main',
+        color: '#d1e5f9'
+      }}
     >
       <ListItemAvatar>
         <Avatar>
-          <PendingActionsIcon />
+          {
+            isDone
+              ? <AssignmentTurnedInIcon />
+              : <PendingActionsIcon color='primary' />
+          }
         </Avatar>
       </ListItemAvatar>
       <ListItemText
@@ -49,7 +57,9 @@ export const TaskListItem = ({ task, key }) => {
         secondary={task.getOwnerName()}
       />
       <ListItemSecondaryAction>
-        <TaskListItemOptions />
+        <TaskListItemOptions
+          id={ task._id }
+        />
       </ListItemSecondaryAction>
     </ListItem>
   )

@@ -10,12 +10,13 @@ export const DashboardCard = ({ title, value, key, children }) => {
       <Card
         sx={{
           minHeight: 160,
-          bgcolor: '#cccbcb',
+          bgcolor: 'info.main',
           p: 2,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          color: '#d1e5f9'
         }}
       >
         {

@@ -69,7 +69,7 @@ export const Dashboard = () => {
             to="/tasks"
             underline="hover"
             sx={{
-              color: '#333232',
+              color: '#d1e5f9',
               m: 1,
               fontSize: 30,
               textAlign: 'center',
