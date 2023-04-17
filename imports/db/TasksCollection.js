@@ -30,9 +30,8 @@ const Task = Class.create({
   },
   helpers: {
     getOwnerName() {
-      const owner = Meteor.users.findOne(this.createdBy)
-
-      return owner.username
+      const owner = Meteor.users.findOne({_id: this.createdBy})
+      return owner?.username
     }
   }
 })

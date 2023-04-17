@@ -7,9 +7,8 @@ Meteor.methods({
     if (!this.userId) {
       throw new Meteor.Error('Not authorized.');
     }
-    
-    const collection = Tasks.rawCollection()
 
+    const collection = Tasks.rawCollection()
     const results = collection.aggregate([
       {
         $project: {

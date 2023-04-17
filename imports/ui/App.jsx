@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import { Dashboard } from "./tasks/Dashboard"
-import { List } from "./tasks/List"
+import { TaskList } from "./tasks/TaskList"
 import { SingIn } from "./auth/SingIn"
 import { SingUp } from "./auth/SingUp"
 import { RequireAuth } from "./auth/RequireAuth"
@@ -38,7 +38,7 @@ export const App = () => {
               path="/tasks"
               element={
                 <RequireAuth>
-                  <List />
+                  <TaskList />
                 </RequireAuth>
               }
             />

@@ -5,7 +5,8 @@ import { Task } from '/imports/db/TasksCollection';
 import { Status } from '/imports/db/TasksStatus'
 
 import '/imports/api/tasks/methods';
-
+import '/imports/api/tasks/publications';
+import '/imports/api/users/publications';
 
 const insertTask = (obj, user) => {
   const task = new Task();

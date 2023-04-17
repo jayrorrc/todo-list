@@ -1,0 +1,34 @@
+import React, { Fragment } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
+export const PageLayout = ({ title, loading, children }) => {
+  return (
+    <Fragment>
+      <Typography
+        component="h1"
+        variant="h5"
+        sx={{ textAlign: 'center', m: 1 }}
+      >
+        {title}
+      </Typography>
+
+      {
+        loading
+          ? (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <CircularProgress color="inherit" />
+            </Box>
+          )
+          : children
+      }
+    </Fragment>
+  )
+}

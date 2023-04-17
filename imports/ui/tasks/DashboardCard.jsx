@@ -30,7 +30,7 @@ export const DashboardCard = ({ title, value, key, children }) => {
           )
         }
 
-        {children}
+        { children }
 
         {
           value
