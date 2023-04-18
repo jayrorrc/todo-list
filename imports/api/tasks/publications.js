@@ -1,25 +1,8 @@
 import { Meteor } from 'meteor/meteor'
 
-import { Task } from '/imports/db/TasksCollection'
-import { Status } from '/imports/db/TasksStatus'
+import { publishTasks } from './repositories/Tasks'
+import { publishTask } from './repositories/Task'
 
-Meteor.publish('tasks', function publishTasks({ hideCompleted }) {
-  const filter = {
-    $or: [
-      { private: false },
-      { createdBy: this.userId }
-    ]
-  }
+Meteor.publish('tasks', publishTasks)
 
-  if (hideCompleted) {
-    filter.status = {
-      $ne: Status.DONE
-    }
-  }
-
-  return Task.find(filter)
-})
-
-Meteor.publish('task', function publishTasks({ id }) {
-  return Task.find({_id: id})
-})
+Meteor.publish('task', publishTask)

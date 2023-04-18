@@ -1,10 +1,4 @@
 import { Meteor } from 'meteor/meteor'
+import { publishUsers } from './repositories/Names'
 
-Meteor.publish('users.names', function publishUsers() {
-  return Meteor.users.find(
-    {},
-    {
-      fields: { 'username': 1 },
-      sort: { createdAt: -1 },
-    })
-});
+Meteor.publish('users.names', publishUsers);
