@@ -78,7 +78,7 @@ export const TaskComponent = () => {
               onClick={() => setEdit(true)}
               sx={{ml: 1}}
             >
-              <EditIcon />
+              <EditIcon color='primary' />
             </IconButton>
           )
         }
@@ -104,7 +104,6 @@ export const TaskComponent = () => {
     Meteor.call('tasks.update', id, dataFormated, () => {
       setEdit(false)
     })
-
   }
 
   return (

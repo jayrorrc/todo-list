@@ -48,7 +48,7 @@ export const TaskListItem = ({ task, userId, key }) => {
         <Avatar>
           {
             isDone
-              ? <AssignmentTurnedInIcon />
+              ? <AssignmentTurnedInIcon color='primary' />
               : <PendingActionsIcon color='primary' />
           }
         </Avatar>

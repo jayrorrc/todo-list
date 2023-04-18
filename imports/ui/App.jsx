@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import { Dashboard } from "./tasks/Dashboard"
-import { TaskList } from "./tasks/TaskList"
+import { TaskListPage } from "./tasks/TaskListPage"
 import { TaskComponent } from "./tasks/TaskComponent"
 import { SingIn } from "./auth/SingIn"
 import { SingUp } from "./auth/SingUp"
@@ -42,7 +42,7 @@ export const App = () => {
                 path="/tasks"
                 element={
                   <RequireAuth>
-                    <TaskList />
+                    <TaskListPage />
                   </RequireAuth>
                 }
               />

@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
-import { useTracker } from 'meteor/react-meteor-data'
+import React, { useState, useEffect } from 'react'
 
+import { useTracker } from 'meteor/react-meteor-data'
 import { useAuth } from "/imports/hooks/use-auth"
 
 import { Task } from '/imports/db/TasksCollection'
 
 import { TaskListItem } from './TaskListItem'
-import { PageLayout } from '../PageLayout'
 
 import List from '@mui/material/List'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 
-export const TaskList = () => {
+export const TaskList = ({all, filterByName}) => {
   const { currentUser } = useAuth()
-  const [ hideCompleted, setHideCompleted ] = useState(true)
+  const [ showCompleted, setShowCompleted ] = useState(false)
+  const [ filterName, setFilterName ] = useState('')
+
+  useEffect(() => {
+    setShowCompleted(all)
+    setFilterName(filterByName)
+  }, [ all, filterByName ])
 
   const { tasks, loading } = useTracker(() => {
     const noDataAvailable = { tasks: [] }
@@ -20,7 +27,7 @@ export const TaskList = () => {
       return noDataAvailable
     }
 
-    const handlerTasks = Meteor.subscribe('tasks', { hideCompleted })
+    const handlerTasks = Meteor.subscribe('tasks', { showCompleted, filterName })
     const handlerUsersNames = Meteor.subscribe('users.names')
 
     if (!handlerTasks.ready() || !handlerUsersNames.ready()) {
@@ -35,14 +42,24 @@ export const TaskList = () => {
     return { tasks }
   })
 
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          m:2,
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Box>
+    )
+  }
+
   return (
-    <PageLayout
-      title="Tarefas cadastradas"
-      loading={ loading }
-    >
-      <List>
-        {tasks.map((task, i) => TaskListItem({task, userId: currentUser._id, key: i}))}
-      </List>
-    </PageLayout>
+    <List>
+      {tasks.map((task, i) => TaskListItem({task, userId: currentUser._id, key: i}))}
+    </List>
   )
 }

@@ -1,7 +1,7 @@
 import { Task } from '/imports/db/TasksCollection'
 import { Status } from '/imports/db/TasksStatus'
 
-export function publishTasks({ hideCompleted }) {
+export function publishTasks({ showCompleted, filterName }) {
   const filter = {
     $or: [
       { private: false },
@@ -9,10 +9,14 @@ export function publishTasks({ hideCompleted }) {
     ]
   }
 
-  if (hideCompleted) {
+  if (!showCompleted) {
     filter.status = {
       $ne: Status.DONE
     }
+  }
+
+  if (filterName) {
+    filter.name = new RegExp(filterName, 'i')
   }
 
   return Task.find(filter)
