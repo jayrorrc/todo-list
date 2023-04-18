@@ -22,21 +22,7 @@ export const TaskListPage = () => {
   const [ pages, setPages ] = useState([])
 
   useEffect(() => {
-    Meteor.call('tasks.total', { showCompleted, filterName }, (error, result) => {
-      if (error) {
-        console.error(error)
-        return
-      }
-
-      let total = Math.floor(result / 4)
-
-      if (result % 4) {
-        total++
-      }
-
-      setTotalPages(total)
-      setCurrentPage(1)
-    })
+    updateTotalPages()
   }, [ showCompleted, filterName ])
 
   useEffect(() => {
@@ -65,6 +51,28 @@ export const TaskListPage = () => {
 
     Meteor.call('tasks.create', dataFormated, () => {
       setOpenDialog(false)
+      setCurrentPage(1)
+    })
+  }
+
+  const updateTotalPages = () => {
+    Meteor.call('tasks.total', { showCompleted, filterName }, (error, result) => {
+      if (error) {
+        console.error(error)
+        return
+      }
+
+      let total = Math.floor(result / 4)
+
+      if (result % 4) {
+        total++
+      }
+
+      setTotalPages(total)
+
+      if (currentPage > total) {
+        setCurrentPage(1)
+      }
     })
   }
 
@@ -142,6 +150,7 @@ export const TaskListPage = () => {
           filterByName={filterName}
           currentPage={currentPage}
           skip={(currentPage - 1) * 4}
+          handleUpdateTotalPages={updateTotalPages}
         />
 
         <ButtonGroup

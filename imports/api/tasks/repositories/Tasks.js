@@ -20,7 +20,7 @@ export function publishTasks({ showCompleted, filterName, skip, limit }) {
   }
 
   return Task.find(filter, {
-    sort: { deadline: 1, createAt: -1, name: 1 },
+    sort: { deadline: 1, createdAt: -1 },
     skip: (skip || 0),
     limit: (limit || 4)
   })

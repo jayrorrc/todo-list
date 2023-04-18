@@ -62,7 +62,7 @@ export const TaskListItem = ({ task, userId, key }) => {
         && (
           <ListItemSecondaryAction>
             <TaskListItemOptions
-              id={ task._id }
+              id={task._id}
             />
           </ListItemSecondaryAction>
         )

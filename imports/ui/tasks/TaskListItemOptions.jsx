@@ -28,8 +28,9 @@ export const TaskListItemOptions = ({ id }) => {
   }
 
   const handleDelete = () => {
-    console.log('delete task')
-    handleClose()
+    Meteor.call('tasks.delete', id, () => {
+      handleClose()
+    })
   }
 
   useEffect(() => {

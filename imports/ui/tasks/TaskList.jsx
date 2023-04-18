@@ -11,7 +11,7 @@ import List from '@mui/material/List'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 
-export const TaskList = ({all, filterByName, skip}) => {
+export const TaskList = ({all, filterByName, skip, handleUpdateTotalPages}) => {
   const { currentUser } = useAuth()
   const [ showCompleted, setShowCompleted ] = useState(false)
   const [ filterName, setFilterName ] = useState('')
@@ -34,7 +34,8 @@ export const TaskList = ({all, filterByName, skip}) => {
       return { ...noDataAvailable, loading: true }
     }
 
-    const tasks = Task.find().fetch()
+    const tasks = Task.find({}, {sort: { deadline: 1, createdAt: -1 }}).fetch()
+    handleUpdateTotalPages()
 
     return { tasks }
   })
@@ -56,7 +57,14 @@ export const TaskList = ({all, filterByName, skip}) => {
 
   return (
     <List>
-      {tasks.map((task, i) => TaskListItem({task, userId: currentUser._id, key: i}))}
+      {
+        tasks.map((task, i) =>
+          TaskListItem({
+            task,
+            userId: currentUser._id,
+            key: i
+          }))
+      }
     </List>
   )
 }

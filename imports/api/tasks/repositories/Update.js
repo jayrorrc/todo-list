@@ -17,14 +17,10 @@ export function update(id, data) {
     throw new Meteor.Error('Not authorized.')
   }
 
-  const task = Task.findOne({ _id: id })
+  const task = Task.findOne({ _id: id, createdBy: this.userId });
 
   if (!task) {
-    throw new Meteor.Error('Document not found.')
-  }
-
-  if (task.createdBy !== this.userId) {
-    throw new Meteor.Error('Not authorized.')
+    throw new Meteor.Error('Access denied.');
   }
 
   task.name = data.name
