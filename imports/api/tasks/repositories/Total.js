@@ -1,7 +1,7 @@
 import { Task } from '/imports/db/TasksCollection'
 import { Status } from '/imports/db/TasksStatus'
 
-export function publishTasks({ showCompleted, filterName, skip, limit }) {
+export function total({ showCompleted, filterName }) {
   const filter = {
     $or: [
       { private: false },
@@ -19,9 +19,5 @@ export function publishTasks({ showCompleted, filterName, skip, limit }) {
     filter.name = new RegExp(filterName, 'i')
   }
 
-  return Task.find(filter, {
-    sort: { deadline: 1, createAt: -1, name: 1 },
-    skip: (skip || 0),
-    limit: (limit || 4)
-  })
+  return Task.find(filter).count()
 }

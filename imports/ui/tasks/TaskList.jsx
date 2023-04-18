@@ -11,7 +11,7 @@ import List from '@mui/material/List'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 
-export const TaskList = ({all, filterByName}) => {
+export const TaskList = ({all, filterByName, skip}) => {
   const { currentUser } = useAuth()
   const [ showCompleted, setShowCompleted ] = useState(false)
   const [ filterName, setFilterName ] = useState('')
@@ -27,17 +27,14 @@ export const TaskList = ({all, filterByName}) => {
       return noDataAvailable
     }
 
-    const handlerTasks = Meteor.subscribe('tasks', { showCompleted, filterName })
+    const handlerTasks = Meteor.subscribe('tasks', { showCompleted, filterName, skip })
     const handlerUsersNames = Meteor.subscribe('users.names')
 
     if (!handlerTasks.ready() || !handlerUsersNames.ready()) {
       return { ...noDataAvailable, loading: true }
     }
 
-    const tasks = Task.find(
-      {},
-      { sort: { deadline: 1, createAt: -1, name: 1 } }
-    ).fetch()
+    const tasks = Task.find().fetch()
 
     return { tasks }
   })

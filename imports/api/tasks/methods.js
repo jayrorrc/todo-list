@@ -6,6 +6,7 @@ import { finish } from './repositories/Finish'
 import { restart } from './repositories/Restart'
 import { update } from './repositories/Update'
 import { create } from './repositories/Create'
+import { total } from './repositories/Total'
 
 Meteor.methods({
   'tasks.summary': summary,
@@ -14,4 +15,5 @@ Meteor.methods({
   'tasks.restart': restart,
   'tasks.update': update,
   'tasks.create': create,
+  'tasks.total': total,
 })
