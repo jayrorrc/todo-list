@@ -12,7 +12,7 @@ import { TaskComponent } from "./tasks/TaskComponent"
 import { SingIn } from "./auth/SingIn"
 import { SingUp } from "./auth/SingUp"
 import { RequireAuth } from "./auth/RequireAuth"
-import { Bar } from "./nav/Bar"
+import { UserFormEdit } from "./users/UserFormEdit"
 
 import { AuthProvider } from "/imports/hooks/use-auth"
 
@@ -26,8 +26,6 @@ export const App = () => {
     <AuthProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'br'}>
         <Container component="main" maxWidth="xs">
-          <Bar />
-
           <BrowserRouter>
             <Routes>
               <Route
@@ -52,6 +50,15 @@ export const App = () => {
                 element={
                   <RequireAuth>
                     <TaskComponent />
+                  </RequireAuth>
+                }
+              />
+
+              <Route
+                path="/account"
+                element={
+                  <RequireAuth>
+                    <UserFormEdit />
                   </RequireAuth>
                 }
               />

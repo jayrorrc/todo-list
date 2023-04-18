@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Form = () => (
+export const UserForm = () => (
   <div>
     <h1>User</h1>
   </div>

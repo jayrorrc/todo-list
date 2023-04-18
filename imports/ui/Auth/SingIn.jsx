@@ -1,34 +1,34 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react'
 
 import {
   useNavigate,
   useLocation,
   Link as RouterLink
-} from "react-router-dom";
+} from "react-router-dom"
 
 import { useAuth } from "/imports/hooks/use-auth"
 
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Link from '@mui/material/Link'
 
 export const SingIn = () => {
-  const navigate = useNavigate();
-  const { state } = useLocation();
+  const navigate = useNavigate()
+  const { state } = useLocation()
 
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [ username, setUsername ] = useState('')
+  const [ password, setPassword ] = useState('')
 
-  const { signin } = useAuth();
+  const { signin } = useAuth()
 
   const submit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     await signin(username, password)
     navigate(state?.path || "/")
-  };
+  }
 
   return (
     <Fragment>
@@ -117,5 +117,5 @@ export const SingIn = () => {
         </Link>
       </Box>
     </Fragment>
-  );
-};
+  )
+}
