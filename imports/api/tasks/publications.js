@@ -18,4 +18,8 @@ Meteor.publish('tasks', function publishTasks({ hideCompleted }) {
   }
 
   return Task.find(filter)
-});
+})
+
+Meteor.publish('task', function publishTasks({ id }) {
+  return Task.find({_id: id})
+})

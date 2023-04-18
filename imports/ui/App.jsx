@@ -1,5 +1,4 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 
 import {
   BrowserRouter,
@@ -9,7 +8,7 @@ import {
 
 import { Dashboard } from "./tasks/Dashboard"
 import { TaskList } from "./tasks/TaskList"
-import { Edit } from "./tasks/Edit"
+import { TaskComponent } from "./tasks/TaskComponent"
 import { SingIn } from "./auth/SingIn"
 import { SingUp } from "./auth/SingUp"
 import { RequireAuth } from "./auth/RequireAuth"
@@ -25,7 +24,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 export const App = () => {
   return (
     <AuthProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'en-gb'}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'br'}>
         <Container component="main" maxWidth="xs">
           <Bar />
 
@@ -52,7 +51,7 @@ export const App = () => {
                 path="task/:id/edit"
                 element={
                   <RequireAuth>
-                    <Edit />
+                    <TaskComponent />
                   </RequireAuth>
                 }
               />

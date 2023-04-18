@@ -12,7 +12,7 @@ import { Status } from '/imports/db/TasksStatus'
 
 import { TaskListItemOptions } from './TaskListItemOptions'
 
-export const TaskListItem = ({ task, key }) => {
+export const TaskListItem = ({ task, userId, key }) => {
   const getTaskName = () => {
     const date = new Date(task.deadline)
     let [ day, month, year, hour, minutes ] = [
@@ -34,6 +34,7 @@ export const TaskListItem = ({ task, key }) => {
   }
 
   const isDone = task.status === Status.DONE
+  const allowEdit = userId === task.createdBy
 
   return (
     <ListItem
@@ -56,11 +57,16 @@ export const TaskListItem = ({ task, key }) => {
         primary={getTaskName()}
         secondary={task.getOwnerName()}
       />
-      <ListItemSecondaryAction>
-        <TaskListItemOptions
-          id={ task._id }
-        />
-      </ListItemSecondaryAction>
+      {
+        allowEdit
+        && (
+          <ListItemSecondaryAction>
+            <TaskListItemOptions
+              id={ task._id }
+            />
+          </ListItemSecondaryAction>
+        )
+      }
     </ListItem>
   )
 }
