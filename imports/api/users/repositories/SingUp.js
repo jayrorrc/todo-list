@@ -8,7 +8,7 @@ import { Genders } from '/imports/db/UsersGenders'
 export function singup(data) {
   check(data, {
     name: String,
-    borthDate: Date,
+    birthdate: Date,
     gender: Match.OneOf(...Genders.getValues()),
     company: String,
     photo: String,
@@ -23,7 +23,7 @@ export function singup(data) {
     email: data.email,
     profile: {
       name: data.name,
-      borthDate: data.borthDate,
+      birthdate: data.birthdate,
       gender: data.gender,
       company: data.company,
       photo: data.photo,

@@ -6,7 +6,7 @@ const UserProfile = Class.create({
   name: 'UserProfile',
   fields: {
     name: String,
-    borthDate: Date,
+    birthdate: Date,
     gender: Genders,
     company: String,
     photo: String

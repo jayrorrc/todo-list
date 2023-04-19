@@ -1,14 +1,13 @@
 import { Meteor } from 'meteor/meteor'
 import { check, Match } from 'meteor/check'
 
-import { Accounts } from 'meteor/accounts-base'
 import { User, UserProfile } from '/imports/db/UsersCollection'
 import { Genders } from '/imports/db/UsersGenders'
 
 export function update(data) {
   check(data, {
     name: String,
-    borthDate: Date,
+    birthdate: Date,
     gender: Match.OneOf(...Genders.getValues()),
     company: String,
     photo: String
@@ -18,7 +17,7 @@ export function update(data) {
     throw new Meteor.Error('Not authorized.')
   }
 
-  const user = User.findOnde({ _id: this.userId })
+  const user = User.findOne({ _id: this.userId })
 
   if (!user) {
     throw new Meteor.Error('Something goes worng!!!')
@@ -26,11 +25,12 @@ export function update(data) {
 
   const profile = new UserProfile()
   profile.name = data.name
-  profile.borthDate = data.borthDate
+  profile.birthdate = data.birthdate
   profile.gender = data.gender
   profile.company = data.company
-  profile.photo = data.foto
+  profile.photo = data.photo
 
   user.profile = profile
+
   user.save()
 }
