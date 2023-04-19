@@ -31,14 +31,14 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
   }
 
   const getAvatar = () => {
-    if (currentUser?.photo) {
+    if (currentUser?.profile?.photo) {
       return (
         <Avatar
           sx={{
             width: 30,
             height: 30
           }}
-          src={currentUser.photo}
+          src={currentUser.profile.photo}
         />
       )
     }
@@ -74,6 +74,23 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
     navigate(url)
   }
 
+  const username = currentUser?.profile?.name || currentUser?.username
+  const getUserEmail = () => {
+    if (!currentUser) {
+      return
+    }
+
+    if (!currentUser.emails) {
+      return
+    }
+
+    if (!currentUser.emails[0]) {
+      return
+    }
+
+    return currentUser.emails[0].address
+  }
+
   if (currentUser) {
     return (
       <Drawer
@@ -95,8 +112,8 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
                 {getAvatar()}
               </ListItemAvatar>
               <ListItemText
-                primary={currentUser?.name || currentUser?.username}
-                secondary={currentUser?.email}
+                primary={username}
+                secondary={getUserEmail()}
               />
             </ListItem>
           </List>

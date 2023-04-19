@@ -1,4 +1,4 @@
 import { Meteor } from 'meteor/meteor'
-import { publishUsers } from './repositories/Names'
+import { publishUsersNames } from './repositories/Names'
 
-Meteor.publish('users.names', publishUsers)
+Meteor.publish('users.names', publishUsersNames)

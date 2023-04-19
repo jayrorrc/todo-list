@@ -4,9 +4,8 @@ import { Accounts } from 'meteor/accounts-base'
 import { Task } from '/imports/db/TasksCollection'
 import { Status } from '/imports/db/TasksStatus'
 
-import '/imports/api/tasks/methods'
-import '/imports/api/tasks/publications'
-import '/imports/api/users/publications'
+import '/imports/api/tasks'
+import '/imports/api/users'
 
 const insertTask = (obj, user) => {
   const task = new Task()

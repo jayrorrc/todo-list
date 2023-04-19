@@ -99,7 +99,7 @@ export const SingIn = () => {
           Cadastrar
         </Link>
 
-        <Link
+        {/* <Link
           component={RouterLink}
           to="#"
           underline="hover"
@@ -109,7 +109,7 @@ export const SingIn = () => {
           }}
         >
           Recuperar senha
-        </Link>
+        </Link> */}
       </Box>
     </PageLayout>
   )

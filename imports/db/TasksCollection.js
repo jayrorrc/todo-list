@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo'
 import { Class } from 'meteor/jagi:astronomy'
 
 import { Status } from './TasksStatus'
+import { User } from './UsersCollection'
 
 const Tasks = new Mongo.Collection('tasks')
 
@@ -30,8 +31,8 @@ const Task = Class.create({
   },
   helpers: {
     getOwnerName() {
-      const owner = Meteor.users.findOne({_id: this.createdBy})
-      return owner?.username
+      const owner = User.findOne({_id: this.createdBy})
+      return owner?.profile?.name || owner?.username
     }
   }
 })

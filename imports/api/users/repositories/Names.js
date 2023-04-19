@@ -1,10 +1,12 @@
-import { Meteor } from 'meteor/meteor'
+import { User } from '/imports/db/UsersCollection'
 
-export function publishUsers() {
-  return Meteor.users.find(
+export function publishUsersNames() {
+  return User.find(
     {},
     {
-      fields: { 'username': 1 },
-      sort: { createdAt: -1 },
+      fields: {
+        'username': 1,
+        'profile.name': 1
+      }
     })
 }

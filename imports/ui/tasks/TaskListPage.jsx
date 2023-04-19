@@ -153,22 +153,27 @@ export const TaskListPage = () => {
           handleUpdateTotalPages={updateTotalPages}
         />
 
-        <ButtonGroup
-          fullWidth
-          variant="contained"
-        >
-          {
-            pages.map((key, i) => (
-              <Button
-                color={ key === currentPage ? 'primary' : 'info' }
-                key={i}
-                onClick={() => setPage(key)}
-              >
-                {key}
-              </Button>)
-            )
-          }
-        </ButtonGroup>
+        {
+          totalPages
+          && (
+            <ButtonGroup
+              fullWidth
+              variant="contained"
+            >
+              {
+                pages.map((key, i) => (
+                  <Button
+                    color={ key === currentPage ? 'primary' : 'info' }
+                    key={i}
+                    onClick={() => setPage(key)}
+                  >
+                    {key}
+                  </Button>)
+                )
+              }
+            </ButtonGroup>
+          )
+        }
 
         <TaskFormCreateDialog
           open={openDialog}
