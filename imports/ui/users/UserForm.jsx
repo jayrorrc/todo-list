@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar'
 import PersonIcon from '@mui/icons-material/Person'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
+import Alert from '@mui/material/Alert';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
@@ -26,6 +27,8 @@ export const UserForm = ({ user, singup, handleSubmit, children }) => {
   const [ username, setUsername ] = useState('')
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+
+  const [ photoError, setPhotoError ] = useState(false)
 
   useEffect(() => {
     if (!user) {
@@ -47,6 +50,11 @@ export const UserForm = ({ user, singup, handleSubmit, children }) => {
 
   const submit = (e) => {
     e.preventDefault()
+
+    if (!photo) {
+      setPhotoError(true)
+      return
+    }
 
     if (handleSubmit) {
       let data = {
@@ -105,6 +113,7 @@ export const UserForm = ({ user, singup, handleSubmit, children }) => {
 
     reader.onloadend = function(e) {
       setPhoto(reader.result)
+      setPhotoError(false)
 
       console.warn('finish upload')
     }
@@ -120,26 +129,29 @@ export const UserForm = ({ user, singup, handleSubmit, children }) => {
         boxShadow: 2
       }}
     >
-      <Stack
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          m: 1
-        }}
-      >
-        {getAvatar()}
+      <Stack>
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            m: 1
+          }}
+        >
+          {getAvatar()}
 
-        <Button variant="contained" component="label">
-          Tocar Imagem
-          <input
-            hidden
-            accept="image/*"
-            type="file"
-            onChange={uploadImage}
-          />
-        </Button>
+          <Button variant="contained" component="label">
+            Tocar Imagem
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={uploadImage}
+            />
+          </Button>
+        </Stack>
+        {photoError && (<Alert severity="error">Photo required</Alert>)}
       </Stack>
 
       {

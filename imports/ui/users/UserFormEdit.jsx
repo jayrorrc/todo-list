@@ -17,7 +17,7 @@ export const UserFormEdit = () => {
 
   return (
     <PageLayout
-      title="Meus Dados"
+      title="Meus dados"
     >
       <UserForm
         user={currentUser}
