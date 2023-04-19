@@ -10,6 +10,9 @@ import { TaskListItem } from './TaskListItem'
 import List from '@mui/material/List'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+import Skeleton from '@mui/material/Skeleton'
+import Stack from '@mui/material/Stack'
+import { Troubleshoot } from '@mui/icons-material'
 
 export const TaskList = ({all, filterByName, skip, handleUpdateTotalPages}) => {
   const { currentUser } = useAuth()
@@ -42,16 +45,12 @@ export const TaskList = ({all, filterByName, skip, handleUpdateTotalPages}) => {
 
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          m:2,
-        }}
-      >
-        <CircularProgress color="inherit" />
-      </Box>
+      <Stack spacing={1} fullWidth sx={{m:2}}>
+        <Skeleton variant="rectangular" height={60} />
+        <Skeleton variant="rectangular" height={60} />
+        <Skeleton variant="rectangular" height={60} />
+        <Skeleton variant="rectangular" height={60} />
+      </Stack>
     )
   }
 

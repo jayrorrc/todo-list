@@ -40,7 +40,7 @@ export const TaskListItem = ({ task, userId, key }) => {
     <ListItem
       key={task._id}
       sx={{
-        bgcolor: (key % 2) ? 'primary.main' : 'info.main',
+        bgcolor: (key % 2) ? 'primary' : 'info',
         color: '#d1e5f9'
       }}
     >

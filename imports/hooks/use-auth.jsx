@@ -25,6 +25,8 @@ function useProvideAuth() {
           }
 
           setAuthed(true)
+          sessionStorage.setItem('authed', true)
+
           resolve()
         })
       })
