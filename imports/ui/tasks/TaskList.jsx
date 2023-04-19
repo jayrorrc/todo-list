@@ -45,7 +45,7 @@ export const TaskList = ({all, filterByName, skip, handleUpdateTotalPages}) => {
 
   if (loading) {
     return (
-      <Stack spacing={1} fullWidth sx={{m:2}}>
+      <Stack spacing={1} sx={{m:2}}>
         <Skeleton variant="rectangular" height={60} />
         <Skeleton variant="rectangular" height={60} />
         <Skeleton variant="rectangular" height={60} />

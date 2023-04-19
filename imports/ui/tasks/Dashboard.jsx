@@ -14,8 +14,11 @@ import { PageLayout } from '../PageLayout'
 export const Dashboard = () => {
   const { currentUser } = useAuth()
 
-  const getTitile = () =>
-    `Olá ${currentUser?.username}, seja bem vindo ao To Do List!`
+  const getTitile = () => {
+    const username = currentUser?.profile?.name || currentUser?.username
+
+    return `Olá ${username}, seja bem vindo ao To Do List!`
+  }
 
   const getCardsData = ({ toDo, inProgress, done }) => [
     {

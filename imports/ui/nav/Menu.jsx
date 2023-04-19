@@ -8,12 +8,16 @@ import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
 import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
-import PersonIcon from '@mui/icons-material/Person'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import HomeIcon from '@mui/icons-material/Home'
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
   const navigate = useNavigate()
@@ -55,18 +59,39 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
     )
   }
 
+  const getItemIcon = ({icon}) => {
+    let componet
+
+    switch (icon) {
+      case 'home':
+        componet = (<HomeIcon />)
+        break;
+      case 'list':
+        componet = (<ListAltIcon />)
+        break;
+      case 'user':
+        componet = (<PersonIcon />)
+        break;
+    }
+
+    return componet
+  }
+
   const items = [
     {
       label: 'Home',
-      url: '/'
+      url: '/',
+      icon: 'home'
     },
     {
       label: 'Lista de tarefas',
-      url: '/tasks'
+      url: '/tasks',
+      icon: 'list'
     },
     {
-      label: 'Minha conta',
-      url: '/account'
+      label: 'Perfil',
+      url: '/account',
+      icon: 'user'
     },
   ]
 
@@ -130,6 +155,9 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
                 <ListItemButton
                   onClick={() => goTo(item)}
                 >
+                  <ListItemIcon>
+                    {getItemIcon(item)}
+                  </ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItemButton>
               </ListItem>
@@ -142,6 +170,9 @@ export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
             <ListItemButton
               onClick={() => singout()}
             >
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
               <ListItemText primary='Sair' />
             </ListItemButton>
           </ListItem>
