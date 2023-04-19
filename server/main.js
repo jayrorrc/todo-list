@@ -36,6 +36,16 @@ const SEED_USERNAME = 'admin'
 const SEED_PASSWORD = 'admin'
 
 Meteor.startup(async () => {
+  Accounts.emailTemplates.resetPassword.text = (user, url) => {
+    console.log('url', url)
+
+    url = url.replace('#/', '')
+
+    console.log('url replaced', url)
+
+    return "Reset password URL: " + url
+  }
+
   if (!Accounts.findUserByUsername(SEED_USERNAME)) {
     Accounts.createUser({
       username: SEED_USERNAME,

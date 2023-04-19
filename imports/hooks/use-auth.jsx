@@ -1,4 +1,6 @@
 import React, { useState, useContext, createContext } from "react"
+import { Accounts } from 'meteor/accounts-base'
+
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 
@@ -12,6 +14,21 @@ function useProvideAuth() {
   return {
     currentUser,
     authed,
+
+    resetPassword(token, password) {
+      return new Promise((resolve, reject) => {
+        Accounts.resetPassword(token, password, (error) => {
+          if (error) {
+            console.error(error)
+
+            reject()
+          }
+
+          setAuthed(true)
+          resolve()
+        })
+      })
+    },
 
     signin(username, password) {
       return new Promise((resolve, reject) => {
