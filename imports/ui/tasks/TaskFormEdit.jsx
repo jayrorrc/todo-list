@@ -2,7 +2,7 @@ import React from 'react'
 
 import { TaskForm } from './TaskForm'
 
-import ButtonGroup from '@mui/material/ButtonGroup';
+import ButtonGroup from '@mui/material/ButtonGroup'
 import Button from '@mui/material/Button'
 
 export const TaskFormEdit = ({ task, handleSubmit, handleCancel }) => {

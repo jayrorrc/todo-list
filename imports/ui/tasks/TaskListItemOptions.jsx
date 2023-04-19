@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react'
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import IconButton from '@mui/material/IconButton'
@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
 export const TaskListItemOptions = ({ id }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const ref = useRef(null)
   const [ anchorEl, setAnchorEl ] = useState(null)

@@ -1,7 +1,7 @@
 import React from 'react'
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
 
 import { TaskFormCreate } from './TaskFormCreate'
 
@@ -16,5 +16,5 @@ export const TaskFormCreateDialog = ({open, handleClose, handleSubmit}) => {
         />
       </DialogContent>
     </Dialog>
-  );
+  )
 }

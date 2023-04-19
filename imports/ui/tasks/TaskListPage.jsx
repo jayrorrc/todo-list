@@ -10,8 +10,8 @@ import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import AddIcon from '@mui/icons-material/Add'
 import IconButton from '@mui/material/IconButton'
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button'
+import ButtonGroup from '@mui/material/ButtonGroup'
 
 export const TaskListPage = () => {
   const [ showCompleted, setShowCompleted ] = useState(false)

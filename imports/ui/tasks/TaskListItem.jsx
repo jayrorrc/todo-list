@@ -5,8 +5,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import PendingActionsIcon from '@mui/icons-material/PendingActions'
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 
 import { Status } from '/imports/db/TasksStatus'
 
@@ -21,7 +21,7 @@ export const TaskListItem = ({ task, userId, key }) => {
       date.getFullYear(),
       date.getHours(),
       date.getMinutes(),
-    ];
+    ]
 
     day = day < 10 ? `0${day}` : day
     month++

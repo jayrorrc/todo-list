@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
 
 export const DashboardCard = ({ title, value, key, children }) => {
   return (

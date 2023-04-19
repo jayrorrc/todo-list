@@ -11,10 +11,10 @@ export function restart(id) {
     throw new Meteor.Error('Not authorized.')
   }
 
-  const task = Task.findOne({ _id: id, createdBy: this.userId });
+  const task = Task.findOne({ _id: id, createdBy: this.userId })
 
   if (!task) {
-    throw new Meteor.Error('Access denied.');
+    throw new Meteor.Error('Access denied.')
   }
 
   if (task.status === Status.TODO) {

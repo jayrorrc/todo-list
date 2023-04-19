@@ -1,28 +1,33 @@
-import React from 'react';
+import React from 'react'
 
 import { useAuth } from "/imports/hooks/use-auth"
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
-import Drawer from '@mui/material/Drawer';
-import Toolbar from '@mui/material/Toolbar';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import PersonIcon from '@mui/icons-material/Person';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Drawer from '@mui/material/Drawer'
+import Toolbar from '@mui/material/Toolbar'
+import Divider from '@mui/material/Divider'
+import Avatar from '@mui/material/Avatar'
+import PersonIcon from '@mui/icons-material/Person'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
 
-export const Menu = () => {
-  const navigate = useNavigate();
+export const Menu = ({ drawerWidth, handleUpdateHasDrawer }) => {
+  const navigate = useNavigate()
 
   const { currentUser, singout } = useAuth()
 
   if (!sessionStorage.getItem('authed')) {
     singout()
+  }
+
+  if (currentUser) {
+    handleUpdateHasDrawer(true)
+  } else {
+    handleUpdateHasDrawer(false)
   }
 
   const getAvatar = () => {
@@ -50,16 +55,23 @@ export const Menu = () => {
     )
   }
 
-  const goHome = () => {
-    navigate('/')
-  }
+  const items = [
+    {
+      label: 'Home',
+      url: '/'
+    },
+    {
+      label: 'Lista de tarefas',
+      url: '/tasks'
+    },
+    {
+      label: 'Minha conta',
+      url: '/account'
+    },
+  ]
 
-  const goList = () => {
-    navigate('/tasks')
-  }
-
-  const goAccount = () => {
-    navigate('/account')
+  const goTo = ({ url }) => {
+    navigate(url)
   }
 
   if (currentUser) {
@@ -67,6 +79,14 @@ export const Menu = () => {
       <Drawer
         anchor={'left'}
         variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
       >
         <Toolbar>
           <List>
@@ -84,27 +104,28 @@ export const Menu = () => {
         <Divider />
 
         <List>
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={goHome}
-            >
-              <ListItemText primary="Home" />
-            </ListItemButton>
-          </ListItem>
+          {
+            items.map((item, i) => (
+              <ListItem
+                key={i}
+                disablePadding
+              >
+                <ListItemButton
+                  onClick={() => goTo(item)}
+                >
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </ListItem>
+            ))
+          }
 
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+          >
             <ListItemButton
-              onClick={goList}
+              onClick={() => singout()}
             >
-              <ListItemText primary="Lista de tarefas" />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={goAccount}
-            >
-              <ListItemText primary="Minha conta" />
+              <ListItemText primary='Sair' />
             </ListItemButton>
           </ListItem>
         </List>

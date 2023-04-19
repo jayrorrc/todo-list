@@ -1,22 +1,22 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 
-import { Accounts } from 'meteor/accounts-base';
-import { Task } from '/imports/db/TasksCollection';
+import { Accounts } from 'meteor/accounts-base'
+import { Task } from '/imports/db/TasksCollection'
 import { Status } from '/imports/db/TasksStatus'
 
-import '/imports/api/tasks/methods';
-import '/imports/api/tasks/publications';
-import '/imports/api/users/publications';
+import '/imports/api/tasks/methods'
+import '/imports/api/tasks/publications'
+import '/imports/api/users/publications'
 
 const insertTask = (obj, user) => {
-  const task = new Task();
+  const task = new Task()
 
-  const date = new Date();
+  const date = new Date()
   let [ day, month, year ] = [
     date.getDate(),
     date.getMonth(),
     date.getFullYear(),
-  ];
+  ]
 
   if (day > 23) {
     day = 1
@@ -33,18 +33,18 @@ const insertTask = (obj, user) => {
   task.save()
 }
 
-const SEED_USERNAME = 'admin';
-const SEED_PASSWORD = 'admin';
+const SEED_USERNAME = 'admin'
+const SEED_PASSWORD = 'admin'
 
 Meteor.startup(async () => {
   if (!Accounts.findUserByUsername(SEED_USERNAME)) {
     Accounts.createUser({
       username: SEED_USERNAME,
       password: SEED_PASSWORD,
-    });
+    })
   }
 
-  const user = Accounts.findUserByUsername(SEED_USERNAME);
+  const user = Accounts.findUserByUsername(SEED_USERNAME)
 
   if (Task.find().count() === 0) {
     [
@@ -90,27 +90,6 @@ Meteor.startup(async () => {
         status: Status.DONE,
         private: false,
       },
-    ].forEach(taskText => insertTask(taskText, user));
-
-    [
-      {
-        name: 'Eighth Task',
-        description: 'Eighth Description',
-        status: Status.TODO,
-        private: false,
-      },
-      {
-        name: 'Ninth Task',
-        description: 'Ninth Description',
-        status: Status.TODO,
-        private: true,
-      },
-      {
-        name: 'Tenth Task',
-        description: 'Tenth Description',
-        status: Status.IN_PROGRESS,
-        private: false,
-      },
-    ].forEach(taskText => insertTask(taskText, { _id: '9vKWZHrfyXsryEfF7' }));
+    ].forEach(taskText => insertTask(taskText, user))
   }
-});
+})

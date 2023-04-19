@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 import {
   BrowserRouter,
   Routes,
   Route,
-} from "react-router-dom";
+} from "react-router-dom"
 
 import { Dashboard } from "./tasks/Dashboard"
 import { TaskListPage } from "./tasks/TaskListPage"
@@ -16,16 +16,13 @@ import { UserFormEdit } from "./users/UserFormEdit"
 
 import { AuthProvider } from "/imports/hooks/use-auth"
 
-import Container from '@mui/material/Container';
-
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 export const App = () => {
   return (
     <AuthProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'br'}>
-        <Container component="main" maxWidth="xs">
           <BrowserRouter>
             <Routes>
               <Route
@@ -66,7 +63,6 @@ export const App = () => {
               <Route path="/singup" element={<SingUp />} />
             </Routes>
           </BrowserRouter>
-        </Container>
       </LocalizationProvider>
     </AuthProvider>
   )

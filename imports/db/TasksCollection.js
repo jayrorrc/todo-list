@@ -1,10 +1,10 @@
-import { Mongo } from 'meteor/mongo';
+import { Mongo } from 'meteor/mongo'
 
-import { Class } from 'meteor/jagi:astronomy';
+import { Class } from 'meteor/jagi:astronomy'
 
 import { Status } from './TasksStatus'
 
-const Tasks = new Mongo.Collection('tasks');
+const Tasks = new Mongo.Collection('tasks')
 
 const Task = Class.create({
   name: 'Task',

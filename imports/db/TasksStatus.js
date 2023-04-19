@@ -7,6 +7,6 @@ const Status = Enum.create({
     IN_PROGRESS: 'Em Andamento',
     DONE: 'Concluida',
   }
-});
+})
 
 export { Status }

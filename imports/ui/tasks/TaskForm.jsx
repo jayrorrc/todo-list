@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Chip from '@mui/material/Chip';
+import Chip from '@mui/material/Chip'
 
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 
@@ -32,7 +32,7 @@ export const TaskForm = ({ task, handleSubmit, readOnly, children }) => {
     setStatus(task.status)
     setDeadline(dayjs(task.deadline))
     setPrivate(task.private)
-  }, [task]);
+  }, [task])
 
   const submit = (e) => {
     e.preventDefault()

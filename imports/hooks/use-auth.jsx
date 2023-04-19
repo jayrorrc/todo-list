@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { Meteor } from 'meteor/meteor';
-import { useTracker } from 'meteor/react-meteor-data';
+import React, { useState, useContext, createContext } from "react"
+import { Meteor } from 'meteor/meteor'
+import { useTracker } from 'meteor/react-meteor-data'
 
-const authContext = createContext();
+const authContext = createContext()
 
 
 function useProvideAuth() {
-  const currentUser = useTracker(() => Meteor.user());
+  const currentUser = useTracker(() => Meteor.user())
   const [ authed, setAuthed ] = useState(false)
 
   return {
@@ -26,7 +26,7 @@ function useProvideAuth() {
 
           return resolve()
         })
-      });
+      })
     },
 
     singout() {
@@ -41,17 +41,17 @@ function useProvideAuth() {
 
           return resolve()
         })
-      });
+      })
     },
   }
 }
 
 export function AuthProvider({ children }) {
-  const auth = useProvideAuth();
+  const auth = useProvideAuth()
 
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
 
 export const useAuth = () => {
-  return useContext(authContext);
-};
+  return useContext(authContext)
+}

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 
 import {
   useNavigate,
@@ -8,11 +8,12 @@ import {
 
 import { useAuth } from "/imports/hooks/use-auth"
 
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Link from '@mui/material/Link'
+
+import { PageLayout } from '../PageLayout'
 
 export const SingIn = () => {
   const navigate = useNavigate()
@@ -31,7 +32,9 @@ export const SingIn = () => {
   }
 
   return (
-    <Fragment>
+    <PageLayout
+      title="Bem vindo ao To Do List!"
+    >
       <Box
         component="form"
         onSubmit={submit}
@@ -41,14 +44,6 @@ export const SingIn = () => {
           boxShadow: 2
         }}
       >
-        <Typography
-          component="h1"
-          variant="h5"
-          sx={{ textAlign: 'center', m: 1 }}
-        >
-          Bem vindo ao To Do List!
-        </Typography>
-
         <TextField
           id="username"
           label="Username"
@@ -116,6 +111,6 @@ export const SingIn = () => {
           Recuperar senha
         </Link>
       </Box>
-    </Fragment>
+    </PageLayout>
   )
 }
